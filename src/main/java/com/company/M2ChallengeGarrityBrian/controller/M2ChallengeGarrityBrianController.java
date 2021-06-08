@@ -15,8 +15,9 @@ public class M2ChallengeGarrityBrianController {
     Random rand = new Random();
 
     private static List<Quote> quote = new ArrayList<>(Arrays.asList(
-            new Quote(1, "Brian", "I need some coffee")
-    ));
+            new Quote(1, "Brian", "I need some coffee"))
+
+    );
 
     private static List<Word> word = new ArrayList<>(Arrays.asList(
             new Word(1, "java", "coffee")
@@ -39,19 +40,22 @@ public class M2ChallengeGarrityBrianController {
     }
 
 
-//     @RequestMapping(value = "/word", method = RequestMethod.GET)
-//    @ResponseStatus(HttpStatus.OK)
-//   public Word getWord(){
-//
-//     }
-    @RequestMapping(value = "/magic", method = RequestMethod.POST)
-    @ResponseStatus(HttpStatus.CREATED)
-    public Answer getAnswer(@RequestBody String question){
-        int randomAnswerIndex = rand.nextInt(answer.size());
-        Answer selectedAnswer = answer.get(randomAnswerIndex);
+    @RequestMapping(value = "/word", method = RequestMethod.GET)
+   @ResponseStatus(HttpStatus.OK)
+   public Word getWord(){
+        int randomWordIndex = rand.nextInt(word.size());
+        Word selectedWord = word.get(randomWordIndex);
+        return selectedWord;
 
-        selectedAnswer.setQuestion(question);
-        return selectedAnswer;
+    }
+//    @RequestMapping(value = "/magic", method = RequestMethod.POST)
+//    @ResponseStatus(HttpStatus.CREATED)
+//    public Answer getAnswer(@RequestBody String question){
+//        int randomAnswerIndex = rand.nextInt(answer.size());
+//        Answer selectedAnswer = answer.get(randomAnswerIndex);
+//
+//        selectedAnswer.setQuestion(question);
+//        return selectedAnswer;
 
      }
-}
+
