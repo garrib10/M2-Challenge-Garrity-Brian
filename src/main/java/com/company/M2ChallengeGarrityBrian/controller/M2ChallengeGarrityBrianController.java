@@ -42,8 +42,13 @@ public class M2ChallengeGarrityBrianController {
             new Word(9, "Failure", "Lack of Success"),
             new Word(10, "Negligence", "Failure to take proper care in doing something")
     ));
+
     // Used magic ball  answers from https://futureofworking.com/20-funny-magic-8-ball-sayings/
+
+  //  int idCounter;//
     private static List<Answer> answer = new ArrayList<>(Arrays.asList(
+// ArrayList shows up as red for some reason need to fix it//
+    // private static List<String> answer = new ArrayList<> (Arrays.asList//
             new Answer(1, "Try Again"),
             new Answer(2, "Things are looking up!"),
             new Answer(3, "What is the worst that can happen"),
@@ -74,6 +79,18 @@ public class M2ChallengeGarrityBrianController {
 
     }
 
+// not working for some reason //
+//    @RequestMapping(value = "/magic", method = RequestMethod.POST)
+//    @ResponseStatus(HttpStatus.CREATED)
+//    public Answer getAnswer(@RequestBody Answer question) {
+//
+//
+//        int randomAnswerIndex = rand.nextInt(answer.size());
+//        String selectAnswer = answer.get(randomAnswerIndex);
+//        question.setAnswer(selectAnswer);
+//        question.setId(idCounter);
+
+
     @RequestMapping(value = "/magic", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.CREATED)
     public Answer getAnswer(@RequestBody String question) {
@@ -84,5 +101,9 @@ public class M2ChallengeGarrityBrianController {
         return selectedAnswer;
 
     }
+
+//        return question;
+
+//    }
 }
 

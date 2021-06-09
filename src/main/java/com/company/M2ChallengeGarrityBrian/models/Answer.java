@@ -53,4 +53,7 @@ public class Answer {
     public int hashCode() {
         return Objects.hash(id, question, answer);
     }
+
+    public void setId() {
+    }
 }
