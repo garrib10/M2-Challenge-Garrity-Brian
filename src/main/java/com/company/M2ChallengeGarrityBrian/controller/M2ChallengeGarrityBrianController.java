@@ -5,7 +5,6 @@ import com.company.M2ChallengeGarrityBrian.models.Quote;
 import com.company.M2ChallengeGarrityBrian.models.Word;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -15,7 +14,7 @@ import java.util.Random;
 public class M2ChallengeGarrityBrianController {
     Random rand = new Random();
 
-    /// Quotes provided by google.com and brainyquotes.com
+    /// Quotes provided by google.com and brainyquotes.com//
     private static List<Quote> quote = new ArrayList<>(Arrays.asList(
             new Quote(1, "Albert Einstein", "Imagination is more important than knowledge."),
             new Quote(2, "John Lennon", " Time you enjoy wasting, was not wasted."),
@@ -45,7 +44,7 @@ public class M2ChallengeGarrityBrianController {
 
     // Used magic ball  answers from https://futureofworking.com/20-funny-magic-8-ball-sayings/
 
-  //  int idCounter;//
+
     private static List<Answer> answer = new ArrayList<>(Arrays.asList(
 // ArrayList shows up as red for some reason need to fix it//
     // private static List<String> answer = new ArrayList<> (Arrays.asList//
@@ -79,6 +78,23 @@ public class M2ChallengeGarrityBrianController {
 
     }
 
+    @RequestMapping(value = "/magic", method = RequestMethod.POST)
+    @ResponseStatus(HttpStatus.CREATED)
+    public Answer getAnswer(@RequestBody  String question) {
+        int randomAnswerIndex = rand.nextInt(answer.size());
+        Answer selectedAnswer = answer.get(randomAnswerIndex);
+
+        selectedAnswer.setQuestion(question);
+
+
+        return selectedAnswer;
+
+    }
+
+
+
+}
+
 // not working for some reason //
 //    @RequestMapping(value = "/magic", method = RequestMethod.POST)
 //    @ResponseStatus(HttpStatus.CREATED)
@@ -90,20 +106,4 @@ public class M2ChallengeGarrityBrianController {
 //        question.setAnswer(selectAnswer);
 //        question.setId(idCounter);
 
-
-    @RequestMapping(value = "/magic", method = RequestMethod.POST)
-    @ResponseStatus(HttpStatus.CREATED)
-    public Answer getAnswer(@RequestBody String question) {
-        int randomAnswerIndex = rand.nextInt(answer.size());
-        Answer selectedAnswer = answer.get(randomAnswerIndex);
-
-        selectedAnswer.setQuestion(question);
-        return selectedAnswer;
-
-    }
-
-//        return question;
-
-//    }
-}
-
+//        return question;//
