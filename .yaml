@@ -1,0 +1,114 @@
+openapi: 3.0.3
+info:
+  title: Api Documentation
+  description: Api Documentation
+  termsOfService: 'urn:tos'
+  contact: {}
+  license:
+    name: Apache 2.0
+    url: 'http://www.apache.org/licenses/LICENSE-2.0'
+  version: '1.0'
+servers:
+  - url: 'http://localhost:8080'
+    description: Inferred Url
+tags:
+  - name: m-2-challenge-garrity-brian-controller
+    description: M 2 Challenge Garrity Brian Controller
+paths:
+  /magic:
+    post:
+      tags:
+        - m-2-challenge-garrity-brian-controller
+      summary: getAnswer
+      operationId: getAnswerUsingPOST
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Answer'
+      responses:
+        '201':
+          description: Created
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Answer'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /quote:
+    get:
+      tags:
+        - m-2-challenge-garrity-brian-controller
+      summary: getQuote
+      operationId: getQuoteUsingGET
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Quote'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+  /word:
+    get:
+      tags:
+        - m-2-challenge-garrity-brian-controller
+      summary: getWord
+      operationId: getWordUsingGET
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Definition'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+        '404':
+          description: Not Found
+components:
+  schemas:
+    Answer:
+      title: Answer
+      type: object
+      properties:
+        answer:
+          type: string
+        id:
+          type: integer
+          format: int32
+        question:
+          type: string
+    Definition:
+      title: Definition
+      type: object
+      properties:
+        definition:
+          type: string
+        id:
+          type: integer
+          format: int32
+        word:
+          type: string
+    Quote:
+      title: Quote
+      type: object
+      properties:
+        author:
+          type: string
+        id:
+          type: integer
+          format: int32
+        quote:
+          type: string

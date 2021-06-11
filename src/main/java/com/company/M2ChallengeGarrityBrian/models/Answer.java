@@ -12,10 +12,9 @@ public class Answer {
         this.question = question;
         this.answer = answer;
     }
-    public Answer(int id, String answer){
-        this.id = id;
-        this.answer = answer;
-    }
+   public Answer(){
+
+   }
 
     public int getId() {
         return id;

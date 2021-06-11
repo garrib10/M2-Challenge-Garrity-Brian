@@ -2,9 +2,10 @@ package com.company.M2ChallengeGarrityBrian.controller;
 
 import com.company.M2ChallengeGarrityBrian.models.Answer;
 import com.company.M2ChallengeGarrityBrian.models.Quote;
-import com.company.M2ChallengeGarrityBrian.models.Word;
+import com.company.M2ChallengeGarrityBrian.models.Definition;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -29,31 +30,31 @@ public class M2ChallengeGarrityBrianController {
 
     ));
     // Used definition in google search
-    private static List<Word> word = new ArrayList<>(Arrays.asList(
-            new Word(1, "Java", "A high-level, class-based, object-oriented programming language that is designed to have as few implementation dependencies as possible"),
-            new Word(2, "HTML", "Hypertext Markup Language, a standardized system for tagging text files to achieve font, color, graphic, and hyperlink effects on World Wide Web pages."),
-            new Word(3, "CSS", "Is a declarative language that controls how webpages look in the browser."),
-            new Word(4, "JavaScript", "An object-oriented computer programming language commonly used to create interactive effects within web browsers."),
-            new Word(5, "React", "Is an open-source front-end JavaScript library for building user interfaces or UI components."),
-            new Word(6, "API", "A set of functions and procedures allowing the creation of applications that access the features or data of an operating system, application, or other service."),
-            new Word(7, "Add", "Join (something) to something else so as to increase the size, number, or amount."),
-            new Word(8, "Success", "The accomplishment of an aim or purpose."),
-            new Word(9, "Failure", "Lack of Success"),
-            new Word(10, "Negligence", "Failure to take proper care in doing something")
+    private static List<Definition> definition = new ArrayList<>(Arrays.asList(
+            new Definition(1, "Java", "A high-level, class-based, object-oriented programming language that is designed to have as few implementation dependencies as possible"),
+            new Definition(2, "HTML", "Hypertext Markup Language, a standardized system for tagging text files to achieve font, color, graphic, and hyperlink effects on World Wide Web pages."),
+            new Definition(3, "CSS", "Is a declarative language that controls how webpages look in the browser."),
+            new Definition(4, "JavaScript", "An object-oriented computer programming language commonly used to create interactive effects within web browsers."),
+            new Definition(5, "React", "Is an open-source front-end JavaScript library for building user interfaces or UI components."),
+            new Definition(6, "API", "A set of functions and procedures allowing the creation of applications that access the features or data of an operating system, application, or other service."),
+            new Definition(7, "Add", "Join (something) to something else so as to increase the size, number, or amount."),
+            new Definition(8, "Success", "The accomplishment of an aim or purpose."),
+            new Definition(9, "Failure", "Lack of Success"),
+            new Definition(10, "Negligence", "Failure to take proper care in doing something")
     ));
 
     // Used magic ball  answers from https://futureofworking.com/20-funny-magic-8-ball-sayings/
 
 
-    private static List<Answer> answer = new ArrayList<>(Arrays.asList(
+   // private static List<String> answer = new ArrayList<>(Arrays.asList(
 // ArrayList shows up as red for some reason need to fix it//
-    // private static List<String> answer = new ArrayList<> (Arrays.asList//
-            new Answer(1, "Try Again"),
-            new Answer(2, "Things are looking up!"),
-            new Answer(3, "What is the worst that can happen"),
-            new Answer(4, "Don't Count on it"),
-            new Answer(5, "Very doubtful"),
-            new Answer(6, "Yes, definitely")
+             private static List<String> answer = new ArrayList<> (Arrays.asList(
+            "Try Again",
+            "Things are looking up!",
+            "What is the worst that can happen",
+            "Don't Count on it",
+            "Very doubtful",
+            "Yes, definitely"
 
     ));
 
@@ -71,39 +72,45 @@ public class M2ChallengeGarrityBrianController {
 
     @RequestMapping(value = "/word", method = RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)
-    public Word getWord() {
-        int randomWordIndex = rand.nextInt(word.size());
-        Word selectedWord = word.get(randomWordIndex);
-        return selectedWord;
+    public Definition getWord() {
+        int randomWordIndex = rand.nextInt(definition.size());
+        Definition selectedDefinition = definition.get(randomWordIndex);
+        return selectedDefinition;
 
     }
+   private static  List<Answer> answerList = new ArrayList<>();
+    private static int idCounter = +1;
 
     @RequestMapping(value = "/magic", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.CREATED)
-    public Answer getAnswer(@RequestBody  String question) {
-        int randomAnswerIndex = rand.nextInt(answer.size());
-        Answer selectedAnswer = answer.get(randomAnswerIndex);
-
-        selectedAnswer.setQuestion(question);
+    public Answer getAnswer(@RequestBody Answer question){
 
 
-        return selectedAnswer;
+        int randomAnswerIndex=rand.nextInt(answer.size());
+        String selectAnswer=answer.get(randomAnswerIndex);
+        question.setAnswer(selectAnswer);
+        question.setId(idCounter);
+        answerList.add(question);
 
-    }
+
+        return question;
+
+//    @RequestMapping(value = "/magic", method = RequestMethod.POST)
+//    @ResponseStatus(HttpStatus.CREATED)
+//    public Answer getAnswer(@RequestBody  String question) {
+//        int randomAnswerIndex = rand.nextInt(answer.size());
+//        Answer selectedAnswer = answer.get(randomAnswerIndex);
+//
+//        selectedAnswer.setQuestion(question);
+//
+//
+//        return selectedAnswer;
+
+}
 
 
 
 }
 
-// not working for some reason //
-//    @RequestMapping(value = "/magic", method = RequestMethod.POST)
-//    @ResponseStatus(HttpStatus.CREATED)
-//    public Answer getAnswer(@RequestBody Answer question) {
-//
-//
-//        int randomAnswerIndex = rand.nextInt(answer.size());
-//        String selectAnswer = answer.get(randomAnswerIndex);
-//        question.setAnswer(selectAnswer);
-//        question.setId(idCounter);
 
-//        return question;//
+
